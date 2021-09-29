@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    static List<Bejegyzes> bejegyzeekLista = new ArrayList<>();
+    static List<Bejegyzes> bejegyzesekLista = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     static Random rnd = new Random();
 
@@ -25,7 +25,7 @@ public class Main {
             System.out.print("\tAdd meg a bejegyzés tartalmát: ");
             tartalom = scanner.next();
             Bejegyzes b = new Bejegyzes(szerzo, tartalom);
-            bejegyzeekLista.add(b);
+            bejegyzesekLista.add(b);
         }
     }
 
@@ -37,7 +37,7 @@ public class Main {
             while (sor != null) {
                 String[] e = sor.split(";");
                 Bejegyzes b = new Bejegyzes(e[0], e[1]);
-                bejegyzeekLista.add(b);
+                bejegyzesekLista.add(b);
                 sor = br.readLine();
             }
             br.close();
@@ -49,16 +49,16 @@ public class Main {
     }
 
     public static void likeokKiosztasa() {
-        int listaHossza = bejegyzeekLista.size();
+        int listaHossza = bejegyzesekLista.size();
         for (int i = 0; i < listaHossza * 20; i++) {
             int random = rnd.nextInt(listaHossza);
-            bejegyzeekLista.get(random).like();
+            bejegyzesekLista.get(random).like();
         }
     }
 
     public static String kiiras() {
         String s = "";
-        for (Bejegyzes item: bejegyzeekLista) {
+        for (Bejegyzes item: bejegyzesekLista) {
             s += item + "\n";
         }
         return s;
@@ -68,22 +68,31 @@ public class Main {
         String ujTartalom;
         System.out.print("Módosítsa a 2. bejegyzést!\n\tAdja meg az új tartalmat: ");
         ujTartalom = scanner.next();
-        bejegyzeekLista.get(1).setTartalom(ujTartalom);
+        bejegyzesekLista.get(1).setTartalom(ujTartalom);
+    }
+
+    public static void legnepszerubbBejegyzes() {
+        int maxLikeIndex = 0;
+        for (int i = 0; i < bejegyzesekLista.size(); i++) {
+            if (bejegyzesekLista.get(maxLikeIndex).getLikeok() < bejegyzesekLista.get(i).getLikeok()) {
+                maxLikeIndex = i;
+            }
+        }
+        System.out.println("LEGNÉPSZERŰBB BEJEGYZÉS: \n" + bejegyzesekLista.get(maxLikeIndex));
     }
 
     public static void main(String[] args) {
         Bejegyzes b1 = new Bejegyzes("Ábel", "Nem vizsgázok ősszel!");
         Bejegyzes b2 = new Bejegyzes("Ádám", "Szeretem az őszt!");
 
-        bejegyzeekLista.add(b1);
-        bejegyzeekLista.add(b2);
+        bejegyzesekLista.add(b1);
+        bejegyzesekLista.add(b2);
 
         felhasznaloBejegyzesei();
         fajlBeolvasas("bejegyzesek.txt");
         likeokKiosztasa();
         felhasznaloModositsaMasodikBejegyzest();
-        kiiras();
-
         System.out.println(kiiras());
+        legnepszerubbBejegyzes();
     }
 }
