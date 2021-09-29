@@ -58,7 +58,7 @@ public class Main {
 
     public static String kiiras() {
         String s = "";
-        for (Bejegyzes item: bejegyzesekLista) {
+        for (Bejegyzes item : bejegyzesekLista) {
             s += item + "\n";
         }
         return s;
@@ -81,13 +81,20 @@ public class Main {
         System.out.println("LEGNÉPSZERŰBB BEJEGYZÉS: \n" + bejegyzesekLista.get(maxLikeIndex));
     }
 
-    public static int vaneBejegyzes() {
-       return 0;
+    public static boolean vaneBejegyzesHarmincotnelTobbLike() {
+        int i = 0;
+        boolean logikai = false;
+        while (i < bejegyzesekLista.size()) {
+            if (bejegyzesekLista.get(i).getLikeok() < 35) {
+                logikai = true;
+            }
+        }
+        return logikai;
     }
 
     public static int tizenotnelKevesebbLikeDarab() {
         int db = 0;
-        for (Bejegyzes item: bejegyzesekLista) {
+        for (Bejegyzes item : bejegyzesekLista) {
             if (item.getLikeok() < 15) {
                 db++;
             }
@@ -108,7 +115,11 @@ public class Main {
         felhasznaloModositsaMasodikBejegyzest();
         System.out.println(kiiras());
         legnepszerubbBejegyzes();
-
+        if (vaneBejegyzesHarmincotnelTobbLike()) {
+            System.out.println("Van olyan bejegyzés, amely 35-nél több like-ot kapott!");
+        } else {
+            System.out.println("Nincs olyan bejegyzés, amely 35-nél több like-ot kapott!");
+        }
         System.out.println("15-nél kevesebb like-ot kapott bejegyzések száma: " + tizenotnelKevesebbLikeDarab() + " db");
     }
 }
