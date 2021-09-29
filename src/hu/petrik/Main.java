@@ -4,12 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
     static List<Bejegyzes> bejegyzeekLista = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
+    static Random rnd = new Random();
 
     public static void felhasznaloBejegyzesei() {
         int ujBejegyzesekSzama;
@@ -46,6 +48,14 @@ public class Main {
 
     }
 
+    public static void likeokKiosztasa() {
+        int listaHossza = bejegyzeekLista.size();
+        for (int i = 0; i < listaHossza * 20; i++) {
+            int random = rnd.nextInt(listaHossza);
+            bejegyzeekLista.get(random).like();
+        }
+    }
+
     public static String kiiras() {
         String s = "";
         for (Bejegyzes item: bejegyzeekLista) {
@@ -62,6 +72,10 @@ public class Main {
         bejegyzeekLista.add(b2);
 
         felhasznaloBejegyzesei();
+        fajlBeolvasas("bejegyzesek.txt");
+        likeokKiosztasa();
+        kiiras();
+
         System.out.println(kiiras());
     }
 }
