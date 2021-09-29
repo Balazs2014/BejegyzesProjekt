@@ -2,7 +2,9 @@ package hu.petrik;
 
 import com.sun.jdi.LocalVariable;
 
+import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Bejegyzes {
     private String szerzo;
@@ -48,7 +50,7 @@ public class Bejegyzes {
     @Override
     public String toString() {
         return this.szerzo + " - " + this.likeok + " - " + this.letrejott + "\n" +
-                "Szerkesztve: " + this.szerkesztve +"\n" +
+                ((!this.letrejott.equals(this.szerkesztve)) ? "Szerkesztve: "+  this.szerkesztve + "\n" : "") +
                 this.tartalom;
     }
 }
