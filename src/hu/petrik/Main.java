@@ -64,6 +64,13 @@ public class Main {
         return s;
     }
 
+    public static void felhasznaloModositsaMasodikBejegyzest() {
+        String ujTartalom;
+        System.out.print("Módosítsa a 2. bejegyzést!\n\tAdja meg az új tartalmat: ");
+        ujTartalom = scanner.next();
+        bejegyzeekLista.get(1).setTartalom(ujTartalom);
+    }
+
     public static void main(String[] args) {
         Bejegyzes b1 = new Bejegyzes("Ábel", "Nem vizsgázok ősszel!");
         Bejegyzes b2 = new Bejegyzes("Ádám", "Szeretem az őszt!");
@@ -74,6 +81,7 @@ public class Main {
         felhasznaloBejegyzesei();
         fajlBeolvasas("bejegyzesek.txt");
         likeokKiosztasa();
+        felhasznaloModositsaMasodikBejegyzest();
         kiiras();
 
         System.out.println(kiiras());
