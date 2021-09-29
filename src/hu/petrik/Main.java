@@ -1,11 +1,10 @@
 package hu.petrik;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.FileWriter;
+import java.util.*;
 
 public class Main {
 
@@ -102,6 +101,22 @@ public class Main {
         return db;
     }
 
+    public static void listaCsokkenobeRendezesLikeokSzerint() {
+
+    }
+
+    public static void fajlbaIras(String fajlNev) {
+        try {
+            FileWriter file = new FileWriter(fajlNev);
+            for (Bejegyzes item : bejegyzesekLista) {
+                file.write(item + System.lineSeparator());
+            }
+            file.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         Bejegyzes b1 = new Bejegyzes("Ábel", "Nem vizsgázok ősszel!");
         Bejegyzes b2 = new Bejegyzes("Ádám", "Szeretem az őszt!");
@@ -121,5 +136,6 @@ public class Main {
             System.out.println("Nincs olyan bejegyzés, amely 35-nél több like-ot kapott!");
         }
         System.out.println("15-nél kevesebb like-ot kapott bejegyzések száma: " + tizenotnelKevesebbLikeDarab() + " db");
+        fajlbaIras("bejegyzesek_rendezett.txt");
     }
 }
