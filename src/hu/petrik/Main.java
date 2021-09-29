@@ -81,6 +81,20 @@ public class Main {
         System.out.println("LEGNÉPSZERŰBB BEJEGYZÉS: \n" + bejegyzesekLista.get(maxLikeIndex));
     }
 
+    public static int vaneBejegyzes() {
+       return 0;
+    }
+
+    public static int tizenotnelKevesebbLikeDarab() {
+        int db = 0;
+        for (Bejegyzes item: bejegyzesekLista) {
+            if (item.getLikeok() < 15) {
+                db++;
+            }
+        }
+        return db;
+    }
+
     public static void main(String[] args) {
         Bejegyzes b1 = new Bejegyzes("Ábel", "Nem vizsgázok ősszel!");
         Bejegyzes b2 = new Bejegyzes("Ádám", "Szeretem az őszt!");
@@ -94,5 +108,7 @@ public class Main {
         felhasznaloModositsaMasodikBejegyzest();
         System.out.println(kiiras());
         legnepszerubbBejegyzes();
+
+        System.out.println("15-nél kevesebb like-ot kapott bejegyzések száma: " + tizenotnelKevesebbLikeDarab() + " db");
     }
 }
